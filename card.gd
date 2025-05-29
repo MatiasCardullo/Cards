@@ -49,10 +49,10 @@ func try_snap_to_slot():
 
 	for item in result:
 		var collider = item.collider
-		if collider is Area2D and collider.has_method("can_accept_card") and collider.can_accept_card():
+		if collider is Area2D and collider.has_method("can_accept_card") and collider.can_accept_card(self):
 			collider.place_card(self)
-			locked = true
 			return
+
 
 # Detecta si el mouse está sobre el sprite (colisión visual simple)
 func _is_mouse_over() -> bool:

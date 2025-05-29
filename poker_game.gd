@@ -11,17 +11,19 @@ func _ready():
 	_create_deck()
 	_shuffle_deck()
 
-	# Por ejemplo: repartir 5 cartas en la mesa
-	var spacing = 100
-	for i in range(5):
+	# Buscar la zona de la mano por nombre
+	var hand_zone = $Zone_Mano
+
+	# Repartir 5 cartas a la zona de la mano
+	for slot in hand_zone.get_children():
+		if not slot is Area2D: continue
 		var card_data = draw_card()
 		if card_data == null:
-			print("No hay más cartas en el mazo.")
 			return
 		var card = card_scene.instantiate()
 		add_child(card)
-		card.position = Vector2(100 + spacing * i, 200)
 		card.set_card(card_data.rank, card_data.suit)
+		card.position = slot.global_position
 
 # Crear el mazo sin repeticiones
 func _create_deck():
